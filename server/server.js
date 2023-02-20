@@ -30,6 +30,11 @@ app.use(cookeParser())
 
 app.use('/',express.static(path.join(__dirname,'public')))
 app.use('/',require('./routes/root.js'))
+
+app.use('/user',require('./routes/userRoute.js'))
+
+
+
 app.all('*',(req,res)=>{
     res.status(404)
     if(req.accepts('html')){
