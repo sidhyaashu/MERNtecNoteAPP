@@ -6,7 +6,7 @@ const cors = require('cors')
 const path = require('path')
 const cookeParser = require('cookie-parser')
 const mongoose = require('mongoose')
-const connectDB = require('./config/dbConn.js')
+// const connectDB = require('./config/dbConn.js')
 
 
 
@@ -16,7 +16,7 @@ dotenv.config()
 
 
 /*============================PORT============================*/
-const PORT = process.env.PORT || 3500
+const PORT = process.env.PORT_CODE || 3500
 
 
 
@@ -54,9 +54,9 @@ app.all('*',(req,res)=>{
 
 
 /* ===========================LISTENING TO THE SERVER=========================== */
-connectDB().then(()=>{
-    app.listen(PORT,()=>console.log(`Server is running on port : ${PORT}`))
-}).catch((err)=>console.log(err))
+// connectDB().then(()=>{
+//     app.listen(PORT,()=>console.log(`Server is running on port : ${PORT}`))
+// }).catch((err)=>console.log(err))
 
 // mongoose.connection.once('open',()=>{
 //     console.log("Connected")
@@ -66,3 +66,11 @@ connectDB().then(()=>{
 // mongoose.connection.on('error',err=>{
 //     console.log(err)
 // })
+
+mongoose.connect(process.env.MONGO_URL,()=>{
+    console.log("MongoDB Connected")
+app.listen(PORT,()=>{
+    console.log(`server is running on port ${PORT}`)
+})
+})
+
